@@ -13,7 +13,7 @@ export default class Employee extends React.Component<any, any> {
      * Components did mount life cycle
      */
     public componentDidMount() {
-        axios.get('http://172.16.3.60:8080/employee').then((response: any) => {
+        axios.get('http://172.16.3.60:8080/employee', { headers: {Authorization: 'Bearer ' + localStorage.getItem("access_token") } }).then((response: any) => {
             this.setState({ employees: response.data });
         });
     }

@@ -12,7 +12,7 @@ export class Navigation extends React.Component<any, any> {
 
 
     public logout() {
-        localStorage.removeItem("authToken");
+        localStorage.removeItem("access_token")
         this.setState({ true: true });
     }
 
@@ -34,9 +34,13 @@ export class Navigation extends React.Component<any, any> {
                                         to="/customer">Customer</NavLink>
                                     <NavLink className="d-inline p-2 bg-dark text-white"
                                         to="/employee">Employee</NavLink>
+                                    <NavLink className="d-inline p-2 bg-dark text-white"
+                                        to="/accordion">Accordion</NavLink>
+                                    <NavLink className="d-inline p-2 bg-dark text-white"
+                                        to="/tabs">Tabs</NavLink>
                                 </Nav>
                             </Navbar.Collapse>
-                            <Button variant="secondary" type="submit" hidden={localStorage.getItem('authToken') ? false : true} onClick={this.logout.bind(this)}>Log Out</Button>
+                            <Button variant="secondary" type="submit" hidden={localStorage.getItem("access_token") ? false : true} onClick={this.logout.bind(this)}>Log Out</Button>
                         </Navbar>}
                 />
 

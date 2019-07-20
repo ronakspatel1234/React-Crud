@@ -39,7 +39,7 @@ export default class AddEmployee extends React.Component<any, any>{
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
         }, 1000);
-        axios.post('http://172.16.3.60:8080/employee', values).then((response: any) => {
+        axios.post('http://172.16.3.60:8080/employee', values, { headers: {Authorization: 'Bearer ' + localStorage.getItem("access_token") } }).then((response: any) => {
             setSubmitting(false);
             resetForm();
             this.props.history.push('/employee');

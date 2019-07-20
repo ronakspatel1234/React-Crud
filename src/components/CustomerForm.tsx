@@ -11,7 +11,7 @@ export class Customer {
     public group: string;
     public createdAt: Date;
     public email: string;
-    public mobileNumber: number;
+    public mobileNumber: string;
     public id?: number;
     match?: any;
     constructor(
@@ -20,7 +20,7 @@ export class Customer {
         group: string = '',
         createdAt: Date = new Date(),
         email: string = '',
-        mobileNumber: number = 0
+        mobileNumber: string = ''
     ) {
         this.name = name;
         this.company = company;
@@ -28,7 +28,6 @@ export class Customer {
         this.createdAt = createdAt;
         this.email = email;
         this.mobileNumber = mobileNumber;
-
     }
 
 }
@@ -40,12 +39,12 @@ export default class CustomerForm extends React.Component<any, any> {
      * Validation schema of customer form
      */
     public validationSchema = object().shape<Customer>({
-        name: string().required().max(13).min(2),
+        name: string().required().min(2).max(13),
         email: string().email().required(),
         company: string().required().min(2),
         group: string().required().min(2),
-        createdAt: date().required(),
-        mobileNumber: number().required().min(10),
+        createdAt: date().required().max(new Date(), 'hsadjkhfkjhjkfhjash'),
+        mobileNumber: string().required().matches(/^[0-9]+$/, 'hello').min(10).max(10),
 
     });
 
@@ -78,7 +77,7 @@ export default class CustomerForm extends React.Component<any, any> {
      * @param id 
      */
     public getRecordById(id: number): void {
-        axios.get('http://172.16.3.60:8080/customers/' + id)
+        axios.get('http://172.16.3.60:8080/customers/' + id, { headers: { Authorization: 'Bearer ' + localStorage.getItem("access_token") } })
             .then(response => {
                 this.setState({ customer: response.data });
                 this.setState({ startDate: new Date(response.data.createdAt) })
@@ -92,18 +91,17 @@ export default class CustomerForm extends React.Component<any, any> {
      * @param { setSubmitting, resetForm } 
      */
     public handleSubmit(customer: Customer, { setSubmitting, resetForm }: FormikActions<Customer>): void {
-        debugger;
         customer.createdAt = this.state.startDate;
         setTimeout(() => {
             setSubmitting(false);
         }, 1000);
         if (this.state.customer.id) {
-            axios.put(`http://172.16.3.60:8080/customers/${customer.id}`, customer).then((response: any) => {
+            axios.put(`http://172.16.3.60:8080/customers/${customer.id}`, customer, { headers: { Authorization: 'Bearer ' + localStorage.getItem("access_token") } }).then((response: any) => {
                 setSubmitting(false);
                 this.props.history.push('/customer');
             });
         } else {
-            axios.post('http://172.16.3.60:8080/customers', customer).then((response: any) => {
+            axios.post('http://172.16.3.60:8080/customers', customer, { headers: { Authorization: 'Bearer ' + localStorage.getItem("access_token") } }).then((response: any) => {
                 setSubmitting(false);
                 resetForm();
                 this.props.history.push('/customer');
@@ -143,8 +141,8 @@ export default class CustomerForm extends React.Component<any, any> {
             </div>
 
             <div className="form-group">
-                <label htmlFor="createdAt">CREATED AT</label>
-                <DatePicker className="form-control" selected={this.state.startDate}
+                <label htmlFor="createdAt">CREATED AT</label><br />
+                <DatePicker className="form-control" value={fields.values.createdAt.toString()}
                     onChange={this.handleChange} name="createdAt" />
                 <ErrorMessage name="createdAt" component="div" /> <br />
             </div>
@@ -157,7 +155,7 @@ export default class CustomerForm extends React.Component<any, any> {
 
             <div className="form-group">
                 <label htmlFor="mobileNumber">MOBILE NUMBER</label>
-                <Field className="form-control" type="number" name="mobileNumber" />
+                <Field className="form-control" type="string" name="mobileNumber" />
                 <ErrorMessage name="mobileNumber" component="div" /> <br />
             </div>
             <button type="submit" >Submit</button>

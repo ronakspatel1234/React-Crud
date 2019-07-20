@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Redirect, RouteProps } from 'react-router';
 
 export interface PrivateRouteProps extends RouteProps {
@@ -12,16 +12,9 @@ const PrivateRoute = (props: PrivateRouteProps) => {
         <Route
             {...rest}
             render={(routeProps) =>
-                localStorage.getItem("authToken") ? (
-                    <Component {...routeProps} />
-                ) : (
-                        <Redirect
-                            to={{
-                                pathname: '/login',
-                                state: { from: routeProps.location }
-                            }}
-                        />
-                    )
+                localStorage.getItem("access_token") ?
+                    <Component {...routeProps} /> :
+                    <Redirect to={{ pathname: '/login', state: { from: routeProps.location } }} />
             }
         />
     );

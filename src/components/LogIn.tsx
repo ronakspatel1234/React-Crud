@@ -9,7 +9,7 @@ export class Login extends React.Component<any, any> {
      * Validation schema of customer form
      */
     public validationSchema = object().shape<any>({
-        userId: string().required(),
+        email: string().required(),
         password: string().required(),
 
     });
@@ -17,7 +17,7 @@ export class Login extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
-        this.state = { user: { userId: '', password: '' }, redirectToReferrer: false };
+        this.state = { user: { email: '', password: '' }, redirectToReferrer: false };
 
     }
 
@@ -28,18 +28,18 @@ export class Login extends React.Component<any, any> {
      * @param { setSubmitting, resetForm } 
      */
     public handleSubmit(values: any, { setSubmitting, resetForm }: FormikActions<any>): void {
-        axios.get('http://172.16.3.60:8080/user')
+        axios.post('http://172.16.3.60:8080/auth/login', values, {
+            headers: {
+
+                'Authorization': 'Bearer'
+            }
+        })
             .then(response => {
-                if (response.data[0].userId == values.userId.toLowerCase()) {
-                    if (response.data[0].password == values.password) {
-                        localStorage.setItem("authToken", values);
-                        this.setState({ redirectToReferrer: true });
-                    } else {
-                        alert('enter valid password');
-                    }
-                } else {
-                    alert('enter valid user id');
-                }
+                console.log(response);
+                localStorage.setItem("access_token", response.data.access_token);
+                this.setState({ redirectToReferrer: true });
+            }).catch(response => {
+                console.log(response);
 
             })
     }
@@ -48,9 +48,9 @@ export class Login extends React.Component<any, any> {
         return (
             <Form>
                 <div className="form-group">
-                    <label htmlFor="">UserId</label>
-                    <Field className="form-control" name="userId" type="text" />
-                    <ErrorMessage name="userId" component="div" />
+                    <label htmlFor="">Email</label>
+                    <Field className="form-control" name="email" type="text" />
+                    <ErrorMessage name="email" component="div" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="">Password</label>
