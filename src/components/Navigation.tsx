@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
@@ -38,6 +38,8 @@ export class Navigation extends React.Component<any, any> {
                                         to="/accordion">Accordion</NavLink>
                                     <NavLink className="d-inline p-2 bg-dark text-white"
                                         to="/tabs">Tabs</NavLink>
+                                    <NavLink className="d-inline p-2 bg-dark text-white"
+                                        to="/custom-validation">Custom Validation</NavLink>
                                 </Nav>
                             </Navbar.Collapse>
                             <Button variant="secondary" type="submit" hidden={localStorage.getItem("access_token") ? false : true} onClick={this.logout.bind(this)}>Log Out</Button>

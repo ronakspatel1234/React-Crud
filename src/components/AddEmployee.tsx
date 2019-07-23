@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, FormikActions, FormikProps } from 'formik';
-import { string, object, number, date } from 'yup';
+import { string, object } from 'yup';
 import axios from 'axios';
 
 export default class AddEmployee extends React.Component<any, any>{
@@ -36,10 +36,10 @@ export default class AddEmployee extends React.Component<any, any>{
     public handleSubmit(values: any, { setSubmitting, resetForm }: FormikActions<any>): void {
         console.log('file', this.fileInput.current.files);
         setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            // alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
         }, 1000);
-        axios.post('http://172.16.3.60:8080/employee', values, { headers: {Authorization: 'Bearer ' + localStorage.getItem("access_token") } }).then((response: any) => {
+        axios.post('http://172.16.3.60:8080/employee', values, { headers: { Authorization: 'Bearer ' + localStorage.getItem("access_token") } }).then((response: any) => {
             setSubmitting(false);
             resetForm();
             this.props.history.push('/employee');

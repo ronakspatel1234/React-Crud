@@ -6,8 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import PrivateRoute from './components/PrivateRoute';
 import { Login } from './components/LogIn';
-import AccordionComponent from './components/Accordion';
-import TabsComponent from './components/Tabs';
+import { CustomValidation } from './components/CustomValidation';
 
 // use for lazy loading component
 
@@ -43,6 +42,7 @@ export default class App extends React.Component {
               <PrivateRoute path='/add-employee' component={AddEmployee} />
               <Route path='/accordion' component={Accordion} />
               <Route path='/tabs' component={Tabs} />
+              <Route path='/custom-validation' component={CustomValidation} />
             </Switch>
           </Suspense>
         </div>

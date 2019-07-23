@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect } from "react-router";
 import axios from "axios";
 import { Formik, Form, FormikActions, Field, ErrorMessage, FormikProps } from "formik";
-import { string, object, number, date } from 'yup';
+import { string, object } from 'yup';
 
 export class Login extends React.Component<any, any> {
     /**

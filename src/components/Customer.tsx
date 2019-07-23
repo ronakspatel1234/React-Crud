@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, ButtonToolbar, Button } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
@@ -38,7 +38,7 @@ export default class Customer extends React.Component<any, any> {
         //     })
         console.log(localStorage.getItem("access_token"));
 
-        axios.get('http://172.16.3.60:8080/customers', { headers: {Authorization: 'Bearer ' + localStorage.getItem("access_token") } })
+        axios.get('http://172.16.3.60:8080/customers', { headers: { Authorization: 'Bearer ' + localStorage.getItem("access_token") } })
             .then(response => {
                 this.setState({ customers: response.data });
             })
@@ -46,7 +46,7 @@ export default class Customer extends React.Component<any, any> {
     }
     public deleteRecord(id: number, event: any) {
         event.stopPropagation();
-        axios.delete(`http://172.16.3.60:8080/customers/${id}`, { headers: {Authorization: 'Bearer ' + localStorage.getItem("access_token") } })
+        axios.delete(`http://172.16.3.60:8080/customers/${id}`, { headers: { Authorization: 'Bearer ' + localStorage.getItem("access_token") } })
             .then(res => {
                 this.refreshList();
             })

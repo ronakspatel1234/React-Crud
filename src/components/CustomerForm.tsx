@@ -1,7 +1,7 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage, FormikActions, FormikProps, FormikBag } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FormikActions, FormikProps } from 'formik';
 import axios from 'axios';
-import { string, object, number, date } from 'yup';
+import { string, object, date, ObjectSchema, Shape } from 'yup';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 
@@ -38,12 +38,12 @@ export default class CustomerForm extends React.Component<any, any> {
     /**
      * Validation schema of customer form
      */
-    public validationSchema = object().shape<Customer>({
+    public validationSchema: ObjectSchema<Shape<{}, Customer>> = object().shape<Customer>({
         name: string().required().min(2).max(13),
         email: string().email().required(),
         company: string().required().min(2),
         group: string().required().min(2),
-        createdAt: date().required().max(new Date(), 'hsadjkhfkjhjkfhjash'),
+        createdAt: date().required().max(new Date(), 'you must be select less than today date'),
         mobileNumber: string().required().matches(/^[0-9]+$/, 'hello').min(10).max(10),
 
     });
@@ -56,7 +56,6 @@ export default class CustomerForm extends React.Component<any, any> {
         super(props);
         this.state = { customer: new Customer(), isEditMode: false, startDate: new Date() };
         this.handleChange = this.handleChange.bind(this);
-        console.log(this.props);
 
     }
     /**
@@ -111,7 +110,7 @@ export default class CustomerForm extends React.Component<any, any> {
 
     handleChange(date: any) {
         this.setState({
-            startDate: date
+            startDate: date,
         });
     }
 
@@ -142,8 +141,10 @@ export default class CustomerForm extends React.Component<any, any> {
 
             <div className="form-group">
                 <label htmlFor="createdAt">CREATED AT</label><br />
-                <DatePicker className="form-control" value={fields.values.createdAt.toString()}
-                    onChange={this.handleChange} name="createdAt" />
+                <DatePicker className="form-control"
+                    onChange={(e: any) => { fields.setFieldValue('createdAt', e); }}
+                    onBlur={fields.handleBlur}
+                    selected={fields.values.createdAt} name="createdAt" />
                 <ErrorMessage name="createdAt" component="div" /> <br />
             </div>
 
