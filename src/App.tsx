@@ -7,6 +7,7 @@ import { Navigation } from './components/Navigation';
 import PrivateRoute from './components/PrivateRoute';
 import { Login } from './components/LogIn';
 import { CustomValidation } from './components/CustomValidation';
+import { CustomForm } from './components/CustomForm';
 
 // use for lazy loading component
 
@@ -43,6 +44,7 @@ export default class App extends React.Component {
               <Route path='/accordion' component={Accordion} />
               <Route path='/tabs' component={Tabs} />
               <Route path='/custom-validation' component={CustomValidation} />
+              <Route path='/custom-form' component={CustomForm} />
             </Switch>
           </Suspense>
         </div>

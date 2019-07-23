@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, Accordion } from "react-bootstrap";
+import React from 'react';
+import { Card, Accordion } from 'react-bootstrap';
 
 export default class AccordionComponent extends React.Component<any, any>{
     render() {

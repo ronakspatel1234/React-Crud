@@ -172,7 +172,7 @@ export default class CustomerForm extends React.Component<any, any> {
                 <h1>Name: {this.state.customer.name}</h1>
                 <Formik
                     initialValues={this.initialValues}
-                    enableReinitialize={true}
+                    // enableReinitialize={true}
                     validationSchema={this.validationSchema}
                     onSubmit={this.handleSubmit.bind(this)}
                     render={(fields: FormikProps<Customer>) => this.renderForm(fields)}

@@ -4,16 +4,17 @@ import DatePicker from "react-datepicker";
 import * as yup from 'yup';
 
 
-export class CustomValidation extends React.Component<any, any> {
+export class CustomValidation extends React.PureComponent<any, any> {
 
 
     constructor(props: any) {
         super(props);
-        this.state = { hidden: true };
+        this.toggleShow = this.toggleShow.bind(this);
+        this.state = { hiddenPassword: true, hiddenConformPassword: true };
     }
 
 
-    public passwordRegExp = /^[!@#\$%\^&][a-zA-Z0-9]{8,12}$/;
+    public passwordRegExp = /^[!@#$%^&][a-zA-Z0-9]{8,12}$/;
     /**
      * Validation schema of customer form
      */
@@ -26,7 +27,6 @@ export class CustomValidation extends React.Component<any, any> {
         conformPassword: yup.string()
             .required('Password Confirmation is Required')
             .oneOf([yup.ref('password')], 'Passwords do not match'),
-
     });
 
     /**
@@ -42,8 +42,16 @@ export class CustomValidation extends React.Component<any, any> {
 
     }
 
-    public toggleShow() {
-        this.setState({ hidden: !this.state.hidden });
+    /**
+     * Toggles show
+     * @param event 
+     */
+    public toggleShow(event: any) {
+        if (event.target.value === "hiddenPassword") {
+            this.setState({ hiddenPassword: !this.state.hiddenPassword });
+        } else if (event.target.value === "hiddenConformPassword") {
+            this.setState({ hiddenConformPassword: !this.state.hiddenConformPassword });
+        }
     }
 
     public renderForm(props: FormikProps<any>): any {
@@ -89,15 +97,28 @@ export class CustomValidation extends React.Component<any, any> {
                 <hr />
                 <div className="form-group">
                     <label>Password</label><br />
-                    <Field className="form-control" type={this.state.hidden ? "password" : "text"} name="password" /><button onClick={this.toggleShow.bind(this)}>Show / Hide</button>
+                    <div className="input-group mb-3">
+                        <Field className="form-control" type={this.state.hiddenPassword ? "password" : "text"} name="password" />
+                        <div className="input-group-append">
+                            <button type="button" className="btn btn-outline-secondary" value="hiddenPassword" onClick={this.toggleShow}>
+                                <i className={this.state.hiddenPassword ? "fa fa-eye" : "fa fa-eye-slash"}></i >
+                            </button>
+                        </div>
+                    </div>
                     <ErrorMessage name="password" component="div" /> <br />
 
                 </div>
                 <div className="form-group">
                     <label>Conform Password</label><br />
-                    <Field className="form-control" type={this.state.hidden ? "password" : "text"} name="conformPassword" /><button onClick={this.toggleShow.bind(this)}>Show / Hide</button>
+                    <div className="input-group mb-3">
+                        <Field className="form-control" type={this.state.hiddenConformPassword ? "password" : "text"} name="conformPassword" />
+                        <div className="input-group-append">
+                            <button type="button" className="btn btn-outline-secondary" value="hiddenConformPassword" onClick={this.toggleShow}>
+                                <i className={this.state.hiddenConformPassword ? "fa fa-eye" : "fa fa-eye-slash"}> </i >
+                            </button>
+                        </div>
+                    </div>
                     <ErrorMessage name="conformPassword" component="div" /> <br />
-
                 </div>
 
                 <button type="submit">Submit</button>
@@ -109,10 +130,9 @@ export class CustomValidation extends React.Component<any, any> {
         return (
             <Formik
                 initialValues={{ createdAt: '', minDate: '', maxDate: '', age: '', password: '', conformPassword: '' }}
-                // enableReinitialize={true}
+                enableReinitialize={true}
                 validationSchema={this.validationSchema}
                 onSubmit={this.handleSubmit}
-
                 render={(props: FormikProps<any>) => this.renderForm(props)} />
         )
     }
