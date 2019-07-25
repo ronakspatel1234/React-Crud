@@ -2,6 +2,8 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import enCustomerResources from '../locales/en/customer.json';
+import frCustomerResources from '../locales/fr/customer.json';
 
 export interface CustomerModal1 {
     onHide: boolean;
@@ -12,6 +14,8 @@ export interface CustomerModal1 {
 export default class Customer extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
+        this.props.i18n.addResourceBundle('en', 'customer', enCustomerResources, true)
+        this.props.i18n.addResourceBundle('fr', 'customer', frCustomerResources, true)
         this.state = { customers: [], addModalShow: false }
         this.deleteRecord = this.deleteRecord.bind(this);
         console.log(this.props);
@@ -20,6 +24,13 @@ export default class Customer extends React.Component<any, any> {
 
     componentDidMount() {
         this.refreshList();
+    }
+
+    componentWillUnmount() {
+        // TO DO
+        this.props.i18n.removeResourceBundle('fr', 'customer');
+        this.props.i18n.removeResourceBundle('en', 'customer');
+        console.log(this.props.i18n.store)
     }
 
     refreshList() {
@@ -61,7 +72,7 @@ export default class Customer extends React.Component<any, any> {
         return (
             <div>
                 <h4>
-                    <NavLink to="/add-customer">Add new Customer</NavLink>
+                    <NavLink to="/add-customer">{this.props.i18n.t('CUSTOMER.ADD_CUSTOMER')}</NavLink>
                 </h4>
                 <Table className="mt-4" striped bordered hover size="sm">
                     <thead>

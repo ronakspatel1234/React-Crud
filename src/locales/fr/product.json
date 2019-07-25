@@ -1,0 +1,7 @@
+{
+    "Welcome to React": "Product FR Welcome to React and react-i18next",
+    "Welcome to React child": "Product FR Welcome to React and react-i18next child",
+    "Welcome to React child1": "Product FR 1 Welcome to React and react-i18next child",
+    "welcomeUser": "Product FR Hello <strong>{{name}}</strong>.",
+    "welcomeProduct": "FR welcome Product"
+}

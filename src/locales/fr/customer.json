@@ -1,0 +1,8 @@
+{
+    "CUSTOMER": {
+        "ADD_CUSTOMER": "FR Add new Customer",
+        "Welcome to React child": "FR Customer Welcome to React and react-i18next child",
+        "Welcome to React child1": "FR Customer 1 Welcome to React and react-i18next child",
+        "welcomeUser": "FR Customer Hello <strong>{{name}}</strong>."
+    }
+}

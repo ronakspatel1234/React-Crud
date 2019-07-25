@@ -1,0 +1,14 @@
+{
+    "COMMON": {
+        "INFO": "FR You must log in to view the page at <strong>{{pathName}}</strong>",
+        "LABEL": {
+            "EMAIL": "FR Email",
+            "PASSWORD": "FR Password",
+            "LOGIN": "Log In"
+        },
+        "ERROR_MSG": {
+            "EMAIL": "FR Email is a required field",
+            "PASSWORD": "FR Password is a required field"
+        }
+    }
+}

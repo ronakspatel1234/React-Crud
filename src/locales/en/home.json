@@ -1,0 +1,20 @@
+{
+    "HOME": {
+        "HEADER": "Main Header",
+        "INFO": "home You must log in to view the page at <strong>{{pathName}}</strong>",
+        "TITLE": {
+            "HEADER_TITLE": "React Js with Web api Demo",
+            "PORTAL_NAME": "Employee Management Portal",
+            "LOADING": "Loading..."
+        },
+        "HEADER_MENU": {
+            "HOME": "Home",
+            "CUSTOMER": "Customer",
+            "EMPLOYEE": "Employee",
+            "ACCORDION": "Accordion",
+            "TABS": "Tabs",
+            "CUSTOM_VALIDATION": "Custom Validation"
+        },
+        "WELCOME_MESSAGE": "Welcome to Employee Management Portal. This is home page."
+    }
+}

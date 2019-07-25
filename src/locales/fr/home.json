@@ -1,0 +1,19 @@
+{
+    "HOME": {
+        "HEADER": "FR Main Header",
+        "TITLE": {
+            "HEADER_TITLE": "FR React Js with Web api Demo",
+            "PORTAL_NAME": "FR Employee Management Portal",
+            "LOADING": "FR Loading..."
+        },
+        "HEADER_MENU": {
+            "HOME": "FR Home",
+            "CUSTOMER": "FR Customer",
+            "EMPLOYEE": "FR Employee",
+            "ACCORDION": "FR Accordion",
+            "TABS": "FR Tabs",
+            "CUSTOM_VALIDATION": "FR Custom Validation"
+        },
+        "WELCOME_MESSAGE": "FR Welcome to Employee Management Portal. This is home page."
+    }
+}
