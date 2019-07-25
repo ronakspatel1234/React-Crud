@@ -8,7 +8,7 @@ import PrivateRoute from './components/PrivateRoute';
 import { Login } from './components/LogIn';
 import { CustomValidation } from './components/CustomValidation';
 import './App.css';
-
+import { environment } from './environment';
 // use for lazy loading component
 const Customer = lazy(() => import('./components/Customer'));
 const Employee = lazy(() => import('./components/Employee'));
@@ -23,6 +23,8 @@ function App()  {
     return (
       <Router>
         <div className="container">
+        {'1st way environment.js => ' +  environment.APP_NAME} <br/>
+        {'2nd way: USING env-cmd => ' + process.env.REACT_APP_SITE_NAME}
           <h3 className="m-3 d-flex justify-content-center">
             <Trans>HOME.TITLE.HEADER_TITLE</Trans>
           </h3>
