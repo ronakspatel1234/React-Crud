@@ -64,7 +64,7 @@ export class CustomValidation extends React.PureComponent<any, any> {
                         onChange={(e: any) => { props.setFieldValue('createdAt', e); }}
                         onBlur={props.handleBlur}
                         selected={props.values.createdAt} name="createdAt" />
-                    <ErrorMessage name="createdAt" component="div" /> <br />
+                    <ErrorMessage name="createdAt" component="p" /> <br />
 
                 </div>
                 <div className="form-group">
@@ -73,7 +73,7 @@ export class CustomValidation extends React.PureComponent<any, any> {
                         onChange={(e: any) => { props.setFieldValue('minDate', e); }}
                         onBlur={props.handleBlur}
                         selected={props.values.minDate} name="minDate" />
-                    <ErrorMessage name="minDate" component="div" /> <br />
+                    <ErrorMessage name="minDate" component="p" /> <br />
 
                 </div>
                 <div className="form-group">
@@ -82,7 +82,7 @@ export class CustomValidation extends React.PureComponent<any, any> {
                         onChange={(e: any) => { props.setFieldValue('maxDate', e); }}
                         onBlur={props.handleBlur}
                         selected={props.values.maxDate} name="maxDate" />
-                    <ErrorMessage name="maxDate" component="div" /> <br />
+                    <ErrorMessage name="maxDate" component="p" /> <br />
 
                 </div>
                 <div className="form-group">
@@ -91,7 +91,7 @@ export class CustomValidation extends React.PureComponent<any, any> {
                         onChange={(e: any) => { props.setFieldValue('dateOfBirth', e); }}
                         onBlur={props.handleBlur}
                         selected={props.values.dateOfBirth} name="dateOfBirth" />
-                    <ErrorMessage name="dateOfBirth" component="div" /> <br />
+                    <ErrorMessage name="dateOfBirth" component="p" /> <br />
 
                 </div>
                 <hr />
@@ -105,7 +105,7 @@ export class CustomValidation extends React.PureComponent<any, any> {
                             </button>
                         </div>
                     </div>
-                    <ErrorMessage name="password" component="div" /> <br />
+                    <ErrorMessage name="password" component="p" /> <br />
 
                 </div>
                 <div className="form-group">
@@ -118,7 +118,7 @@ export class CustomValidation extends React.PureComponent<any, any> {
                             </button>
                         </div>
                     </div>
-                    <ErrorMessage name="conformPassword" component="div" /> <br />
+                    <ErrorMessage name="conformPassword" component="p" /> <br />
                 </div>
 
                 <button type="submit">Submit</button>
